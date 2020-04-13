@@ -96,8 +96,6 @@ public class CompetitionFloydWarshall {
                         }
                     }
                     int speed = maxSpeed();
-                    System.out.println("distance: " + max + " speed: " + speed);
-                    // System.out.println((int) Math.ceil((max*1000)/speed));
                     return (int) Math.ceil((max * 1000) / speed);
                 }
             }
@@ -115,7 +113,17 @@ public class CompetitionFloydWarshall {
                 }
             }
         }
-        print(tableDistance);
+     //   print(tableDistance);
+    }
+    public boolean fullyReachable(){
+        for(int i = 0; i<V; i++){
+            for(int j = 0; j<V; j++){
+                if(tableDistance[i][j] == INF) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     public int maxSpeed(){
         int speed = sA;
@@ -127,7 +135,7 @@ public class CompetitionFloydWarshall {
         }
         return speed;
     }
-    public void print(double table[][]){
+  /*public void print(double table[][]){
         {
             System.out.println("The following matrix shows the shortest "+
                     "distances between every pair of vertices");
@@ -143,17 +151,5 @@ public class CompetitionFloydWarshall {
                 System.out.println();
             }
         }
-    }
-
-    public boolean fullyReachable(){
-        for(int i = 0; i<V; i++){
-            for(int j = 0; j<V; j++){
-                if(tableDistance[i][j] == INF) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
+    }*/
 }
