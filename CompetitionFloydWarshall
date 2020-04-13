@@ -1,0 +1,163 @@
+/*
+ * A Contest to Meet (ACM) is a reality TV contest that sets three contestants at three random
+ * city intersections. In order to win, the three contestants need all to meet at any intersection
+ * of the city as fast as possible.
+ * It should be clear that the contestants may arrive at the intersections at different times, in
+ * which case, the first to arrive can wait until the others arrive.
+ * From an estimated walking speed for each one of the three contestants, ACM wants to determine the
+ * minimum time that a live TV broadcast should last to cover their journey regardless of the contestantsâ€™
+ * initial positions and the intersection they finally meet. You are hired to help ACM answer this question.
+ * You may assume the following:
+ *    ï‚· Each contestant walks at a given estimated speed.
+ *    ï‚· The city is a collection of intersections in which some pairs are connected by one-way
+ * streets that the contestants can use to traverse the city.
+ *
+ * This class implements the competition using Floyd-Warshall algorithm
+ */
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CompetitionFloydWarshall {
+
+    /**
+     * @param filename: A filename containing the details of the city road network
+     * @param sA, sB, sC: speeds for 3 contestants
+     */
+    private int V;                            // number of intersections/vertices
+    private int E;                            // number of streets/edges
+    private double tableDistance[][];         // table of street distances (edge weights)
+    private int tableSequence[][];            // table of shortest path intersections
+    private int sA, sB, sC;
+    private String filename;
+    public static final double INF = Double.POSITIVE_INFINITY;
+
+    CompetitionFloydWarshall (String filename, int sA, int sB, int sC)  {
+        File file;
+        Scanner scan;
+        try{
+            if(filename!=null) {
+                this.sA = sA;
+                this.sB = sB;
+                this.sC = sC;
+                this.filename = filename;
+                file = new File(filename);
+                scan = new Scanner(file);
+                V = scan.nextInt();
+                E = scan.nextInt();
+                initialiseTables(scan);
+            }
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+    public void initialiseTables(Scanner scan){
+        tableDistance = new double[V][V];
+        for(int i = 0; i<V; i++){
+            for(int j = 0;  j<V; j++){
+                tableDistance[i][j] = INF;
+            }
+        }
+        for(int i = 0; i<E; i++){
+            int v = scan.nextInt();
+            int e = scan.nextInt();
+            double distance = scan.nextDouble();
+            tableDistance[v][e] = distance;
+        }
+        for (int i = 0; i<V; i++){
+            tableDistance[i][i] = 0.0;
+        }
+        tableSequence = new int[V][V];
+        for(int i = 0; i<V; i++){
+            for(int j = 0; j<V; j++) {
+                if(j==i){
+                    tableSequence[i][j] = 0;
+                }
+                else {
+                    tableSequence[i][j] = j;
+                }
+            }
+        }
+    }
+
+    /**
+     * @return int: minimum minutes that will pass before the three contestants can meet
+     */
+    public int timeRequiredforCompetition(){
+        if(V>=3) {
+            if ((sA >= 50) && (sB >= 50) && (sC >= 50) && (sA <= 100) && (sB <= 100) && (sC <= 100)) {
+                findShortestPath();
+                double max = 0.0;
+                if(fullyReachable()) {
+                    for (int i = 0; i < V; i++) {
+                        for (int j = 0; j < V; j++) {
+                            if ((tableDistance[i][j] > max) && (tableDistance[i][j] != INF)) {
+                                max = tableDistance[i][j];
+                            }
+                        }
+                    }
+                    int speed = maxSpeed();
+                    System.out.println("distance: " + max + " speed: " + speed);
+                    // System.out.println((int) Math.ceil((max*1000)/speed));
+                    return (int) Math.ceil((max * 1000) / speed);
+                }
+            }
+        }
+        return -1;
+    }
+    public void findShortestPath(){
+        for(int k = 0; k<V; k++) {
+            for (int i = 0; i < V; i++) {
+                for (int j = 0; j < V; j++) {
+                    if (tableDistance[i][k] + tableDistance[k][j] < tableDistance[i][j]) {
+                        tableDistance[i][j] = tableDistance[i][k] + tableDistance[k][j];
+                        tableSequence[i][j] = k;
+                    }
+                }
+            }
+        }
+        print(tableDistance);
+    }
+    public int maxSpeed(){
+        int speed = sA;
+        if(speed>sB){
+            speed = sB;
+        }
+        if(speed>sC){
+            speed = sC;
+        }
+        return speed;
+    }
+    public void print(double table[][]){
+        {
+            System.out.println("The following matrix shows the shortest "+
+                    "distances between every pair of vertices");
+            for (int i=0; i<V; ++i)
+            {
+                for (int j=0; j<V; ++j)
+                {
+                    if (table[i][j]==INF)
+                        System.out.print("INF ");
+                    else
+                        System.out.print(table[i][j]+"   ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public boolean fullyReachable(){
+        for(int i = 0; i<V; i++){
+            for(int j = 0; j<V; j++){
+                if(tableDistance[i][j] == INF) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+}

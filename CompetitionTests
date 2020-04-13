@@ -1,0 +1,59 @@
+import java.io.FileNotFoundException;
+
+import static org.junit.Assert.*;
+
+public class CompetitionTest {
+
+        @Test
+        public void testDijkstraConstructor() throws FileNotFoundException {
+            CompetitionDijkstra theComp1 = new CompetitionDijkstra("tinyEWD.txt", 0, 70, 60);
+            assertEquals(theComp1.timeRequiredforCompetition(), -1);
+            CompetitionDijkstra theComp2 = new CompetitionDijkstra("tinyEWD.txt", 100, 0, 60);
+            assertEquals(theComp2.timeRequiredforCompetition(), -1);
+            CompetitionDijkstra theComp3 = new CompetitionDijkstra("tinyEWD.txt", 100, 90, 0);
+            assertEquals(theComp3.timeRequiredforCompetition(), -1);
+            CompetitionDijkstra theComp4 = new CompetitionDijkstra("tinyEWD.txt", -1, -1, -5);
+            assertEquals(theComp4.timeRequiredforCompetition(), -1);
+            CompetitionDijkstra theComp5 = new CompetitionDijkstra("tinyEWD.txt", 50, -10, 100);
+            assertEquals(theComp5.timeRequiredforCompetition(), -1);
+        }
+
+        @Test
+        public void testFWConstructor() throws FileNotFoundException {
+            CompetitionFloydWarshall theComp1 = new CompetitionFloydWarshall("tinyEWD.txt", 0, 70, 60);
+            assertEquals(theComp1.timeRequiredforCompetition(), -1);
+            CompetitionFloydWarshall theComp2 = new CompetitionFloydWarshall("tinyEWD.txt", 100, 0, 60);
+            assertEquals(theComp2.timeRequiredforCompetition(), -1);
+            CompetitionFloydWarshall theComp3 = new CompetitionFloydWarshall("tinyEWD.txt", 100, 90, 0);
+            assertEquals(theComp3.timeRequiredforCompetition(), -1);
+            CompetitionFloydWarshall theComp4 = new CompetitionFloydWarshall("tinyEWD.txt", -1, -1, -5);
+            assertEquals(theComp4.timeRequiredforCompetition(), -1);
+            CompetitionFloydWarshall theComp5 = new CompetitionFloydWarshall("tinyEWD.txt", 50, -10, 100);
+            assertEquals(theComp5.timeRequiredforCompetition(), -1);
+        }
+
+        @Test
+        public void testFloydWarshall() throws FileNotFoundException {
+            CompetitionFloydWarshall thecomp1 = new CompetitionFloydWarshall("tinyEWD.txt",60,70,80);
+            assertEquals(thecomp1.timeRequiredforCompetition(),31);
+            CompetitionFloydWarshall thecomp2 = new CompetitionFloydWarshall("tinyEWD.txt",80,80,60);
+            assertEquals(thecomp2.timeRequiredforCompetition(),31);
+            CompetitionFloydWarshall thecomp3 = new CompetitionFloydWarshall("tinyEWD.txt",70,60,90);
+            assertEquals(thecomp3.timeRequiredforCompetition(),31);
+            CompetitionFloydWarshall thecomp4 = new CompetitionFloydWarshall("1000EWD.txt",60,90,80);
+            assertEquals(thecomp4.timeRequiredforCompetition(),24);
+
+        }
+        @Test
+        public void CompetitionDijkstra() throws FileNotFoundException {
+                CompetitionDijkstra theComp = new CompetitionDijkstra("tinyEWD.txt", 90, 80, 60);
+                assertEquals(theComp.timeRequiredforCompetition(), 31);
+                CompetitionDijkstra theComp2 = new CompetitionDijkstra("tinyEWD.txt", 100, 60, 70);
+                assertEquals(theComp2.timeRequiredforCompetition(),31);
+                CompetitionDijkstra theComp3 = new CompetitionDijkstra("tinyEWD.txt", 100, 90, 60);
+                assertEquals(theComp3.timeRequiredforCompetition(),31);
+                CompetitionDijkstra thecomp4 = new CompetitionDijkstra("1000EWD.txt",60,90,80);
+                thecomp4.timeRequiredforCompetition();
+        }
+
+}
