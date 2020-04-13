@@ -38,7 +38,6 @@ public class CompetitionFloydWarshall {
         File file;
         Scanner scan;
         try{
-            if(filename!=null) {
                 this.sA = sA;
                 this.sB = sB;
                 this.sC = sC;
@@ -48,11 +47,8 @@ public class CompetitionFloydWarshall {
                 V = scan.nextInt();
                 E = scan.nextInt();
                 initialiseTables(scan);
-            }
         }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
+        catch (FileNotFoundException e) {} catch( NullPointerException e) {}
     }
     public void initialiseTables(Scanner scan){
         tableDistance = new double[V][V];
