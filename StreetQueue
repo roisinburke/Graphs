@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+
+public class StreetQueue {
+
+    ArrayList<Street> queue;
+    ArrayList<Street> backup;
+
+    StreetQueue() {
+        this.queue = new ArrayList<Street>();
+        this.backup = new ArrayList<Street>();;
+    }
+
+    public void enqueue(Street street) {
+        if(this.queue.isEmpty()) {
+            this.queue.add(street);
+            this.backup.add(street);
+        }
+        else {
+            for(int i = 0 ; i < this.queue.size(); i++) {
+                if(street.distance() < this.queue.get(i).distance()) {
+                    this.queue.add(i, street);
+                    this.backup.add(i, street);
+                    return;
+                }
+            }
+            this.queue.add(street);
+            this.backup.add(street);
+        }
+    }
+
+    public Street dequeue()
+    {
+        Street remove = this.queue.remove(0);
+        return remove;
+    }
+
+    public int length()
+    {
+        return this.queue.size();
+    }
+
+    public void reset()
+    {
+        for(int i = 0 ; i < this.backup.size() ; i++)
+        {
+            this.queue.add(this.backup.get(i));
+        }
+    }
+}

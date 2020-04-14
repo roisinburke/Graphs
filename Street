@@ -1,0 +1,23 @@
+public class Street {
+    private Intersection start;
+    private Intersection end;
+    private double distance = -1;
+
+    Street(Intersection start, Intersection end, double distance) {
+        this.start = start;
+        this.end = end;
+        this.distance = distance;
+    }
+
+    public double distance()
+    {
+        return distance;
+    }
+
+    public Intersection origin() { return start; }
+
+    public Intersection destination()
+    {
+        return end;
+    }
+}
