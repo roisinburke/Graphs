@@ -1,59 +1,145 @@
+import org.junit.Test;
+
 import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
-public class CompetitionTest {
+public class CompetitionTests {
 
-        @Test
-        public void testDijkstraConstructor() throws FileNotFoundException {
-            CompetitionDijkstra theComp1 = new CompetitionDijkstra("tinyEWD.txt", 0, 70, 60);
-            assertEquals(theComp1.timeRequiredforCompetition(), -1);
-            CompetitionDijkstra theComp2 = new CompetitionDijkstra("tinyEWD.txt", 100, 0, 60);
-            assertEquals(theComp2.timeRequiredforCompetition(), -1);
-            CompetitionDijkstra theComp3 = new CompetitionDijkstra("tinyEWD.txt", 100, 90, 0);
-            assertEquals(theComp3.timeRequiredforCompetition(), -1);
-            CompetitionDijkstra theComp4 = new CompetitionDijkstra("tinyEWD.txt", -1, -1, -5);
-            assertEquals(theComp4.timeRequiredforCompetition(), -1);
-            CompetitionDijkstra theComp5 = new CompetitionDijkstra("tinyEWD.txt", 50, -10, 100);
-            assertEquals(theComp5.timeRequiredforCompetition(), -1);
-        }
+    @Test
+    public void testInvalidSpeedsCompetitionDijkstra() {
+        int expectedResult = -1;
+        CompetitionDijkstra theComp1 = new CompetitionDijkstra("tinyEWD.txt", 0, 50, 50);
+        assertEquals(theComp1.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp2 = new CompetitionDijkstra("tinyEWD.txt", 100, 0, 100);
+        assertEquals(theComp2.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp3 = new CompetitionDijkstra("tinyEWD.txt", 50, 50, 0);
+        assertEquals(theComp3.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp4 = new CompetitionDijkstra("tinyEWD.txt", 101, 90, 90);
+        assertEquals(theComp4.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp5 = new CompetitionDijkstra("tinyEWD.txt", 90, 101, 90);
+        assertEquals(theComp5.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp6 = new CompetitionDijkstra("tinyEWD.txt", 90, 60, 101);
+        assertEquals(theComp6.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp7 = new CompetitionDijkstra("tinyEWD.txt", 90, 40, 0);
+        assertEquals(theComp7.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp8 = new CompetitionDijkstra("tinyEWD.txt", 40, 80, 40);
+        assertEquals(theComp8.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp9 = new CompetitionDijkstra("tinyEWD.txt", 40, 40, 90);
+        assertEquals(theComp9.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp10 = new CompetitionDijkstra("tinyEWD.txt", 0, 0, 0);
+        assertEquals(theComp10.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp11 = new CompetitionDijkstra("tinyEWD.txt", 101, 101, 101);
+        assertEquals(theComp11.timeRequiredforCompetition(), expectedResult);
+    }
 
-        @Test
-        public void testFWConstructor() throws FileNotFoundException {
-            CompetitionFloydWarshall theComp1 = new CompetitionFloydWarshall("tinyEWD.txt", 0, 70, 60);
-            assertEquals(theComp1.timeRequiredforCompetition(), -1);
-            CompetitionFloydWarshall theComp2 = new CompetitionFloydWarshall("tinyEWD.txt", 100, 0, 60);
-            assertEquals(theComp2.timeRequiredforCompetition(), -1);
-            CompetitionFloydWarshall theComp3 = new CompetitionFloydWarshall("tinyEWD.txt", 100, 90, 0);
-            assertEquals(theComp3.timeRequiredforCompetition(), -1);
-            CompetitionFloydWarshall theComp4 = new CompetitionFloydWarshall("tinyEWD.txt", -1, -1, -5);
-            assertEquals(theComp4.timeRequiredforCompetition(), -1);
-            CompetitionFloydWarshall theComp5 = new CompetitionFloydWarshall("tinyEWD.txt", 50, -10, 100);
-            assertEquals(theComp5.timeRequiredforCompetition(), -1);
-        }
+    @Test
+    public void testInvalidSpeedsCompetitionFW() {
+        int expectedResult = -1;
+        CompetitionFloydWarshall theComp1 = new CompetitionFloydWarshall("tinyEWD.txt", 0, 50, 50);
+        assertEquals(theComp1.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp2 = new CompetitionFloydWarshall("tinyEWD.txt", 100, 0, 100);
+        assertEquals(theComp2.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp3 = new CompetitionFloydWarshall("tinyEWD.txt", 50, 50, 0);
+        assertEquals(theComp3.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp4 = new CompetitionFloydWarshall("tinyEWD.txt", 101, 90, 90);
+        assertEquals(theComp4.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp5 = new CompetitionFloydWarshall("tinyEWD.txt", 90, 101, 90);
+        assertEquals(theComp5.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp6 = new CompetitionFloydWarshall("tinyEWD.txt", 90, 60, 101);
+        assertEquals(theComp6.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp7 = new CompetitionFloydWarshall("tinyEWD.txt", 90, 40, 0);
+        assertEquals(theComp7.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp8 = new CompetitionFloydWarshall("tinyEWD.txt", 40, 80, 40);
+        assertEquals(theComp8.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp9 = new CompetitionFloydWarshall("tinyEWD.txt", 40, 40, 90);
+        assertEquals(theComp9.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp10 = new CompetitionFloydWarshall("tinyEWD.txt", 0, 0, 0);
+        assertEquals(theComp10.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp11 = new CompetitionFloydWarshall("tinyEWD.txt", 101, 101, 101);
+        assertEquals(theComp11.timeRequiredforCompetition(), expectedResult);
+    }
 
-        @Test
-        public void testFloydWarshall() throws FileNotFoundException {
-            CompetitionFloydWarshall thecomp1 = new CompetitionFloydWarshall("tinyEWD.txt",60,70,80);
-            assertEquals(thecomp1.timeRequiredforCompetition(),31);
-            CompetitionFloydWarshall thecomp2 = new CompetitionFloydWarshall("tinyEWD.txt",80,80,60);
-            assertEquals(thecomp2.timeRequiredforCompetition(),31);
-            CompetitionFloydWarshall thecomp3 = new CompetitionFloydWarshall("tinyEWD.txt",70,60,90);
-            assertEquals(thecomp3.timeRequiredforCompetition(),31);
-            CompetitionFloydWarshall thecomp4 = new CompetitionFloydWarshall("1000EWD.txt",60,90,80);
-            assertEquals(thecomp4.timeRequiredforCompetition(),24);
+    @Test
+    public void testFW() {
+        int expectedResult = 31;
+        CompetitionFloydWarshall theComp1 = new CompetitionFloydWarshall("tinyEWD.txt", 60, 70, 80);
+        assertEquals(theComp1.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp2 = new CompetitionFloydWarshall("tinyEWD.txt", 80, 70, 60);
+        assertEquals(theComp2.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp3 = new CompetitionFloydWarshall("tinyEWD.txt", 70, 60, 90);
+        assertEquals(theComp3.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp4 = new CompetitionFloydWarshall("input-D.txt", 100, 90, 60);
+        assertEquals(theComp4.timeRequiredforCompetition(), expectedResult);
+        expectedResult = -1;
+        CompetitionFloydWarshall theComp5 = new CompetitionFloydWarshall("input-A.txt", 50, 100, 67);
+        assertEquals(theComp5.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp6 = new CompetitionFloydWarshall("input-C.txt", 50, 100, 67);
+        assertEquals(theComp6.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp7 =new CompetitionFloydWarshall("input-J.txt",60,100,67);
+        assertEquals(theComp7.timeRequiredforCompetition(), expectedResult);
+        expectedResult = 8334;
+        CompetitionFloydWarshall theComp8 = new CompetitionFloydWarshall("input-B.txt", 100, 60, 67);
+        assertEquals(theComp8.timeRequiredforCompetition(), expectedResult);
+        expectedResult = 134;
+        CompetitionFloydWarshall theComp9 = new CompetitionFloydWarshall("input-L.txt", 100, 60, 67);
+        assertEquals(theComp9.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp10 = new CompetitionFloydWarshall("input-N.txt", 100, 60, 67);
+        assertEquals(theComp10.timeRequiredforCompetition(), expectedResult);
+        expectedResult = 250;
+        CompetitionFloydWarshall theComp12 = new CompetitionFloydWarshall("input-M.txt", 100, 60, 67);
+        assertEquals(theComp12.timeRequiredforCompetition(), expectedResult);
+        expectedResult = -1;
+        CompetitionFloydWarshall theComp13 = new CompetitionFloydWarshall("input-F.txt", 100, 60, 67);
+        assertEquals(theComp13.timeRequiredforCompetition(), expectedResult);
+        CompetitionFloydWarshall theComp14 = new CompetitionFloydWarshall("input-G.txt", 100, 60, 67);
+        assertEquals(theComp14.timeRequiredforCompetition(), expectedResult);
+    }
 
-        }
-        @Test
-        public void CompetitionDijkstra() throws FileNotFoundException {
-                CompetitionDijkstra theComp = new CompetitionDijkstra("tinyEWD.txt", 90, 80, 60);
-                assertEquals(theComp.timeRequiredforCompetition(), 31);
-                CompetitionDijkstra theComp2 = new CompetitionDijkstra("tinyEWD.txt", 100, 60, 70);
-                assertEquals(theComp2.timeRequiredforCompetition(),31);
-                CompetitionDijkstra theComp3 = new CompetitionDijkstra("tinyEWD.txt", 100, 90, 60);
-                assertEquals(theComp3.timeRequiredforCompetition(),31);
-                CompetitionDijkstra thecomp4 = new CompetitionDijkstra("1000EWD.txt",60,90,80);
-                thecomp4.timeRequiredforCompetition();
-        }
+    @Test
+    public void testCompetitionDijkstra() {
+        int expectedResult = 31;
+        CompetitionDijkstra theComp1 = new CompetitionDijkstra("tinyEWD.txt", 90, 80, 60);
+        assertEquals(theComp1.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp2 = new CompetitionDijkstra("tinyEWD.txt", 90, 60, 70);
+        assertEquals(theComp2.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp3 = new CompetitionDijkstra("tinyEWD.txt", 90, 90, 60);
+        assertEquals(theComp3.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp4 = new CompetitionDijkstra("input-D.txt", 100, 90, 60);
+        assertEquals(theComp4.timeRequiredforCompetition(), expectedResult);
+        expectedResult = -1;
+        CompetitionDijkstra theComp5 = new CompetitionDijkstra("input-A.txt", 90, 90, 60);
+        assertEquals(theComp5.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp6 = new CompetitionDijkstra("input-C.txt", 50, 100, 67);
+        assertEquals(theComp6.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp7 =new CompetitionDijkstra("input-J.txt",60,100,67);
+        assertEquals(theComp7.timeRequiredforCompetition(), expectedResult);
+        expectedResult = 8334;
+        CompetitionDijkstra theComp8 = new CompetitionDijkstra("input-B.txt", 100, 60, 67);
+        assertEquals(theComp8.timeRequiredforCompetition(), expectedResult);
+        expectedResult = 134;
+        CompetitionDijkstra theComp9 = new CompetitionDijkstra("input-L.txt", 100, 60, 67);
+        assertEquals(theComp9.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp10 = new CompetitionDijkstra("input-N.txt", 100, 60, 67);
+        assertEquals(theComp10.timeRequiredforCompetition(), expectedResult);
+        expectedResult = 250;
+        CompetitionDijkstra theComp11 = new CompetitionDijkstra("input-M.txt", 100, 60, 67);
+        assertEquals(theComp11.timeRequiredforCompetition(), expectedResult);
+        expectedResult = -1;
+        CompetitionDijkstra theComp13 = new CompetitionDijkstra("input-F.txt", 100, 60, 67);
+        assertEquals(theComp13.timeRequiredforCompetition(), expectedResult);
+        CompetitionDijkstra theComp14 = new CompetitionDijkstra("input-G.txt", 100, 60, 67);
+        assertEquals(theComp14.timeRequiredforCompetition(), expectedResult);
+    }
+
+    @Test
+    public void testNulls() {
+        assertEquals(null, new CompetitionDijkstra(null, 50, 60, 70).graph);
+        assertEquals(null, new CompetitionDijkstra("", 50, 60, 70).graph);
+        assertArrayEquals(null, new CompetitionFloydWarshall("", 50, 60, 70).tableDistance);
+        assertArrayEquals(null, new CompetitionFloydWarshall(null, 50, 60, 70).tableDistance);
+    }
+
+
 
 }
