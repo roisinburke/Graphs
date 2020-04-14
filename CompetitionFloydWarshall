@@ -28,8 +28,8 @@ public class CompetitionFloydWarshall {
      */
     private int V;                            // number of intersections/vertices
     private int E;                            // number of streets/edges
-    private double tableDistance[][];         // table of street distances (edge weights)
-    private int tableSequence[][];            // table of shortest path intersections
+    double tableDistance[][];         // table of street distances (edge weights)
+    int tableSequence[][];            // table of shortest path intersections
     private int sA, sB, sC;
     private String filename;
     public static final double INF = Double.POSITIVE_INFINITY;
@@ -38,15 +38,16 @@ public class CompetitionFloydWarshall {
         File file;
         Scanner scan;
         try{
-                this.sA = sA;
-                this.sB = sB;
-                this.sC = sC;
-                this.filename = filename;
-                file = new File(filename);
-                scan = new Scanner(file);
-                V = scan.nextInt();
-                E = scan.nextInt();
-                initialiseTables(scan);
+            this.sA = sA;
+            this.sB = sB;
+            this.sC = sC;
+            this.filename = filename;
+            file = new File(filename);
+            scan = new Scanner(file);
+            V = scan.nextInt();
+            E = scan.nextInt();
+            initialiseTables(scan);
+            scan.close();
         }
         catch (FileNotFoundException e) {} catch( NullPointerException e) {}
     }
@@ -95,7 +96,7 @@ public class CompetitionFloydWarshall {
                             }
                         }
                     }
-                    int speed = maxSpeed();
+                    int speed = Math.min(sA, Math.min(sB, sC));
                     return (int) Math.ceil((max * 1000) / speed);
                 }
             }
@@ -113,7 +114,7 @@ public class CompetitionFloydWarshall {
                 }
             }
         }
-     //   print(tableDistance);
+        //   print(tableDistance);
     }
     public boolean fullyReachable(){
         for(int i = 0; i<V; i++){
@@ -125,17 +126,8 @@ public class CompetitionFloydWarshall {
         }
         return true;
     }
-    public int maxSpeed(){
-        int speed = sA;
-        if(speed>sB){
-            speed = sB;
-        }
-        if(speed>sC){
-            speed = sC;
-        }
-        return speed;
-    }
-  /*public void print(double table[][]){
+    /*
+    public void print(double table[][]){
         {
             System.out.println("The following matrix shows the shortest "+
                     "distances between every pair of vertices");
